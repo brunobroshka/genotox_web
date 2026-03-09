@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
 
-function Loader() {
+type LoaderProps = {
+  message?: string;
+  position?: "center" | "onsite";
+};
+
+function Loader({message, position = "center"}: LoaderProps) {
+  const _position = position === "center" ? "z-50 inset-0 fixed"  : "";
   return (
-    <div className="fixed inset-0  flex-col gap-8 flex items-center justify-center  z-50">
+    <div className={` ${_position} flex-col gap-8 flex items-center justify-center `}>
       <motion.span
         initial={{ y: 0 }}
         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -16,6 +22,7 @@ function Loader() {
       >
         {" "}
       </motion.span>
+      <span className="text-xs text-neutral-400 shadow-sm">{message}</span>
     </div>
   );
 }
