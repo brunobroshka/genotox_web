@@ -1,7 +1,7 @@
 import Plot from "react-plotly.js";
 import { useEffect, useState } from "react";
 import * as genotoxApi from "../service/genotoxService";
-import { motion } from "framer-motion";
+
 function PieChart({ casNum,setHoverEffectDatabases }) {
   const [data, setData] = useState<any>(undefined);
   const formatData = (labels, data) => {
@@ -73,11 +73,9 @@ function PieChart({ casNum,setHoverEffectDatabases }) {
 
   return (
     <>
-    <motion.div initial={{opacity:0}}   transition={{ duration: 1,delay:0.1 }} animate={{opacity:1}}  className=" mt-2 max-w-lg mx-auto flex justify-center items-center">
+    <div className=" mt-2 max-w-lg mx-auto flex justify-center items-center">
       {data && (
         <Plot
-
-          // onUnhover={() => setHoverEffectDatabases({})} 
           onHover={(e) => setHoverEffectDatabases({"color":e.points[0].color,"databases":e.points[0].data.databases[e.points[0].label]})}
           data={data}
           layout={{ autosize: true, font: { color: "green" }}}
@@ -87,7 +85,7 @@ function PieChart({ casNum,setHoverEffectDatabases }) {
         />
       )}
 
-    </motion.div>
+    </div>
 
     </>
   );
