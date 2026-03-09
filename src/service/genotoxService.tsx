@@ -26,3 +26,12 @@ export const getPieChartData = async (formData: any) => {
   );
   return response
 }
+
+
+export const getHeatMapData = async (FormData:any) => {
+  const response = await apiClient.post(
+    '/api/heatmap/',
+    FormData,
+  );
+  return response
+}
