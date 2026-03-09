@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import useIsMobile from "../hooks/useIsMobile";
 
 function VisualizeData({
@@ -8,24 +7,18 @@ function VisualizeData({
   setSelectedDatabase,
   hoverEffectDatabases,
 }) {
-  
   const keys = Object.keys(result);
   const isMobile = useIsMobile();
-  
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      transition={{ duration: 0.3, delay: 0.1 }}
-      animate={{ opacity: 1 }}
-      className="flex flex-col px-1 py-1"
-    >
+    <div className="flex flex-col px-1 py-1">
       {!isMobile && (
         <div className="flex flex-row flex-wrap gap-2">
           {keys.map((key, index) => {
-            let  isActive = undefined
-            if(Object.keys(hoverEffectDatabases).length > 0) {
-                isActive =  hoverEffectDatabases["databases"].includes(key);
-            }else {
+            let isActive = undefined;
+            if (Object.keys(hoverEffectDatabases).length > 0) {
+              isActive = hoverEffectDatabases["databases"].includes(key);
+            } else {
               isActive = false;
             }
 
@@ -36,13 +29,12 @@ function VisualizeData({
                     isActive ? "text-black" : "text-gray-500"
                   }  min-w-44 opacity-70 hover:opacity-100 hover:text-black transition-all duration-300 ease-in-out rounded shadow-md p-1 transform hover:-translate-y-1`}
                   style={{
-                    boxShadow: isActive
-                      && `0px 2px 1px ${hoverEffectDatabases["color"]}`,
-                      
-                    
+                    boxShadow:
+                      isActive &&
+                      `0px 2px 1px ${hoverEffectDatabases["color"]}`,
                   }}
                   key={index}
-                   onClick={() => setSelectedDatabase(key)}
+                  onClick={() => setSelectedDatabase(key)}
                 >
                   {key}
                 </button>
@@ -51,7 +43,7 @@ function VisualizeData({
           })}
         </div>
       )}
-      {isMobile  && (
+      {isMobile && (
         <select
           className="bg-white border rounded   p-[1px]"
           value={selectedDatabase}
@@ -59,12 +51,16 @@ function VisualizeData({
         >
           {keys.map((key) => {
             if (result[key] !== null) {
-              return <option key={key} value={key}>{key}</option>;
+              return (
+                <option key={key} value={key}>
+                  {key}
+                </option>
+              );
             }
           })}
         </select>
       )}
-    </motion.div>
+    </div>
   );
 }
 
