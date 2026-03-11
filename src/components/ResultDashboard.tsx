@@ -49,7 +49,7 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
           />
 
           <div className="flex flex-col justify-center items-center lg:flex-row flex-1 min-h-0">
-            <div className="flex-1 min-w-0 overflow-auto">
+            <div className="flex-1 min-w-0 overflow-auto border-r-2 border-neutral-50">
               <PieChart
                 casNum={submittedCas}
                 setHoverEffectDatabases={setHoverEffectDatabases}
