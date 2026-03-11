@@ -35,7 +35,7 @@ function Form(props: formDataQueryProps) {
               placeholder="Introduce a CAS Number"
             />
             <div className="flex flex-wrap gap-3">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 p-2.5 border rounded-md md:text-base text-sm m-auto shadow-md text-neutral-500  items-center">
                 <input
                   value="true"
                   type="checkbox"
@@ -53,7 +53,7 @@ function Form(props: formDataQueryProps) {
                 disabled={isLoading}
                 className={`${
                   isLoading ? "cursor-not-allowed" : "cursor-pointer"
-                }   md:text-base text-sm m-auto md:m-0 transform hover:-translate-y-1 active:-translate-y-0 rounded-md border p-1 shadow-md px-12 text-neutral-500 transition-all ease-in-out duration-300 hover:bg-gray-100 hover:text-green-900 font-semibold`}
+                }   md:text-sm text-xs m-auto md:m-0 transform hover:-translate-y-1 active:-translate-y-0 rounded-md border p-1 shadow-md px-12 text-neutral-500 transition-all ease-in-out duration-300 hover:bg-gray-100 hover:text-green-900 font-semibold`}
                 type="submit"
               >
                 Submit
