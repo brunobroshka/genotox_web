@@ -1,6 +1,4 @@
-import { IoMdClose } from "react-icons/io";
-
-function ModalInformationDatabase({ result, selectedDatabase, onClose }) {
+function ModalInformationDatabase({ result, selectedDatabase }) {
   return (
     <>
       <div className="flex justify-between bg-white p-2 rounded-t-md flex-none">
@@ -9,14 +7,7 @@ function ModalInformationDatabase({ result, selectedDatabase, onClose }) {
             {selectedDatabase}
           </span>
         </div>
-        <button
-          className="rounded-full p-1 cursor-pointer transform  hover:-translate-y-1 opacity-70 hover:opacity-100 transition-all duration-300 ease-in-out  group bg-red-400"
-          onClick={() => onClose()}
-        >
-          <IoMdClose className="text-neutral-100" size={20} />
-        </button>
       </div>
-
       <div className="bg-white flex-1 rounded-b-md overflow-auto p-2">
         {selectedDatabase &&
           result[selectedDatabase]["index"].map((value, idx) => (

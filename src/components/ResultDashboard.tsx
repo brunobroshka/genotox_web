@@ -22,8 +22,14 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
     setSelectedDatabase(event.target.value);
   };
 
-  const closeModalDataBaseInformation = () => {
-    setSelectedDatabase(undefined);
+  const onDragModalDatabaseInformation = (
+    event: React.DragEvent<HTMLDivElement>,
+    info: any,
+  ) => {
+    const pos = Math.abs(info.offset.x);
+    if (pos > 70) {
+      setSelectedDatabase(undefined);
+    }
   };
 
   return (
@@ -34,7 +40,6 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
           animate={{ opacity: 1 }}
           className="flex-1 overflow-hidden"
         >
-
           <VisualizeData
             setSelectedDatabase={setSelectedDatabase}
             hoverEffectDatabases={hoverEffectDatabases}
@@ -60,16 +65,19 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
       <AnimatePresence>
         {result && selectedDatabase && (
           <motion.div
+            dragElastic={0.1}
+            onDrag={onDragModalDatabaseInformation}
+            drag="x"
+            whileDrag={{ opacity: 0.5, scale: 0.95 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed shadow p-1 ring-2 ring-neutral-200 rounded-md  
+            className="fixed cursor-grab  shadow p-1 ring-2 ring-neutral-200 rounded-md  
              w-[95%] h-[95%] bg-neutral-100 top-[1%] left-[2.5%] flex flex-col"
           >
             <ModalInformationDatabase
               result={result}
               selectedDatabase={selectedDatabase}
-              onClose={closeModalDataBaseInformation}
             />
           </motion.div>
         )}

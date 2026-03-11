@@ -24,7 +24,7 @@ function App() {
               setResult={setResult}
               handleSubmittedCasNum={handleSubmittedCasNum}
             />
-            <ButtonDownloadData result={result} submittedCas={submittedCas}  />
+            <ButtonDownloadData result={result} casNum={submittedCas}  />
           </div>
           <ResultDashboard submittedCas={submittedCas} result={result} />
         </div>
