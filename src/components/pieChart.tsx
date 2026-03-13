@@ -2,7 +2,15 @@ import Plot from "react-plotly.js";
 import { useEffect, useState } from "react";
 import * as genotoxApi from "../service/genotoxService";
 
-function PieChart({ casNum,setHoverEffectDatabases }) {
+type PieChartProps = {
+  casNum: string,
+  setHoverEffectDatabases: React.Dispatch<React.SetStateAction<object>>
+}
+
+function PieChart(props: PieChartProps) {
+  
+  const {casNum,setHoverEffectDatabases} = props;
+
   const [data, setData] = useState<any>(undefined);
   const formatData = (labels, data) => {
     const result = {

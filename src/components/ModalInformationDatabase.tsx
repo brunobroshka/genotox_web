@@ -1,4 +1,13 @@
-function ModalInformationDatabase({ result, selectedDatabase }) {
+import { Result } from "../interfacesAndTypes";
+
+type ModalInformationDatabaseProps = {
+  result: Result,
+  selectedDatabase : any
+}
+function ModalInformationDatabase(props: ModalInformationDatabaseProps) {
+
+    const {result,selectedDatabase} = props;
+    
   return (
     <>
       <div className="flex justify-between bg-white p-2 rounded-t-md flex-none">

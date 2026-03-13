@@ -4,10 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import ModalInformationDatabase from "./ModalInformationDatabase";
 import { useState } from "react";
 import HeatMapChart from "./HeatMapChart";
+import { Result } from "../interfacesAndTypes";
 
-interface ResultDashboardProps {
+type ResultDashboardProps = {
   submittedCas: string;
-  result: any;
+  result: Result;
 }
 
 function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {

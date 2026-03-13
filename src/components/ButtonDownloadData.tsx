@@ -1,8 +1,9 @@
 import { FaFileDownload } from "react-icons/fa";
 import useDownloadData from "../hooks/useDownloadData";
+import { Result } from "../interfacesAndTypes";
 
 type ButtonDownloadDataProps = {
-  result: object | boolean;
+  result: Result;
   casNum: string;
 };
 

@@ -57,6 +57,8 @@ function useGenotoxQuery(setResult, handleSubmittedCasNum) {
         });
 
         setResult(result.data.data);
+        console.log("useGenotoxQuery")
+        console.log(result.data.data)
         handleSubmittedCasNum(casNum);
         setLoading(false);
       } catch (error) {

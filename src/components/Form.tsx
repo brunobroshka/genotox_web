@@ -1,9 +1,10 @@
 import { CiKeyboard } from "react-icons/ci";
 import Loader from "./Loader";
 import useGenotoxQuery from "../hooks/useGenotoxQuery";
+import { Result } from "../interfacesAndTypes";
 
 type formDataQueryProps = {
-  setResult: React.Dispatch<React.SetStateAction<boolean | object>>;
+  setResult: React.Dispatch<React.SetStateAction<Result>>;
   handleSubmittedCasNum: (casNum: string) => void;
 };
 
