@@ -1,18 +1,14 @@
 import "./App.css";
 import Header from "./components/Header";
 import Form from "./components/Form";
-import { useState } from "react";
 import Footer from "./components/Footer";
 import ButtonDownloadData from "./components/ButtonDownloadData";
 import ResultDashboard from "./components/ResultDashboard";
+import useFormLogic from "./hooks/useFormLogic";
 
 function App() {
-  const [result, setResult] = useState<object | boolean>(false);
-  const [submittedCas, setSubmittedCas] = useState<string>("");
-
-  const handleSubmittedCasNum = (casNum: string) => {
-    setSubmittedCas(casNum);
-  };
+  
+  const { result, setResult, submittedCas, handleSubmittedCasNum } = useFormLogic();
 
   return (
     <>
@@ -24,7 +20,7 @@ function App() {
               setResult={setResult}
               handleSubmittedCasNum={handleSubmittedCasNum}
             />
-            <ButtonDownloadData result={result} casNum={submittedCas}  />
+            <ButtonDownloadData result={result} casNum={submittedCas} />
           </div>
           <ResultDashboard submittedCas={submittedCas} result={result} />
         </div>
