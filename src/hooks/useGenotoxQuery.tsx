@@ -8,74 +8,70 @@ function useGenotoxQuery(setResult, handleSubmittedCasNum) {
   const executeQuery = async (casNum: string, showDetails: string) => {
     setLoading(true);
     setResult(false);
+    
+    const formData = new FormData();
+    formData.append("cas_rn", casNum);
+    formData.append("details", showDetails);
 
-    let siguePidiendoProgreso = true;
-    const toastId = toast.loading("Processing data 0%");
 
-    async function sondearProgreso() {
-      if (!siguePidiendoProgreso) return;
+    let isPolling = true;
+    const toastId = toast.loading("Processing data 0%", {
+      position: "top-right"
+    });
 
-      const resultado = await genotoxApi.queryProgress(casNum);
-      const progress = Number(resultado.data.progress);
 
-      toast.update(toastId, { render: `Processing data ${progress}%` });
-
-      if (progress < 100) {
-        setTimeout(sondearProgreso, 1000);
-      }
-    }
-
-    async function iniciarProceso() {
-      const formData = new FormData();
-      formData.append("cas_rn", casNum);
-      formData.append("details", showDetails);
-
+    const pollProgress = async () => {
+      if (!isPolling) return;
       try {
-        setTimeout(sondearProgreso, 500);
+        const resultado = await genotoxApi.queryProgress(casNum);
+        const progress = Number(resultado.data.progress || 0);
 
-        const result = await genotoxApi.query(formData);
+        toast.update(toastId, { render: `Processing data ${progress}%` });
 
-        if (!result.data.download_ready) {
-          toast.update(toastId, {
-            render: result.data.error,
-            type: "error",
-            isLoading: false,
-            autoClose: 3000,
-          });
-          siguePidiendoProgreso = false;
-          setLoading(false);
-          return;
+        if (progress < 100 && isPolling) {
+          setTimeout(pollProgress, 1000); // Vuelve a consultar en 1 segundo
         }
+      } catch (error) {
+        console.error("Error trying to get the progress...", error);
+      }
+    };
 
-        siguePidiendoProgreso = false;
+    try {
+     
+      setTimeout(pollProgress, 500);
 
+   
+      const response = await genotoxApi.query(formData);
+      isPolling = false; 
+
+      if (response.status == 200) {
+        setResult(response.data);
+        handleSubmittedCasNum(casNum);
+        
+    
         toast.update(toastId, {
           render: "Successfully",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-
-        setResult(result.data.data);
-        console.log("useGenotoxQuery")
-        console.log(result.data.data)
-        handleSubmittedCasNum(casNum);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        siguePidiendoProgreso = false;
-        setLoading(false);
-
-        toast.update(toastId, {
-          render: "Error",
-          type: "error",
-          isLoading: false,
-          autoClose: 3000,
-        });
       }
+    } catch (err) {
+   
+      isPolling = false; 
+      console.error("Error getting data...", err);
+      
+  
+      toast.update(toastId, {
+        render: "Error getting data...",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    } finally {
+      setLoading(false);
+      isPolling = false; 
     }
-
-    iniciarProceso();
   };
 
   return { isLoading, executeQuery };

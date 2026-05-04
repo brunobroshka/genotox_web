@@ -16,7 +16,7 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
   const [selectedDatabase, setSelectedDatabase] = useState<string | undefined>(
     undefined,
   );
-
+ 
   const handleChangeDatabase = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -44,7 +44,7 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
           <VisualizeData
             setSelectedDatabase={setSelectedDatabase}
             hoverEffectDatabases={hoverEffectDatabases}
-            result={result}
+            result={result?.pie_chart_data}
             selectedDatabase={selectedDatabase}
             handleChangeDatabase={handleChangeDatabase}
           />
@@ -52,12 +52,12 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
           <div className="flex flex-col justify-center items-center lg:flex-row flex-1 min-h-0">
             <div className="flex-1 min-w-0 overflow-auto border-r-2 border-neutral-50">
               <PieChart
-                casNum={submittedCas}
+                result={result.pie_chart_data}
                 setHoverEffectDatabases={setHoverEffectDatabases}
               />
             </div>
-            <div className="flex-1 min-w-0 overflow-auto">
-              <HeatMapChart casNum={submittedCas} />
+             <div className="flex-1 min-w-0 overflow-auto">
+              <HeatMapChart result={result} />
             </div>
           </div>
         </motion.div>

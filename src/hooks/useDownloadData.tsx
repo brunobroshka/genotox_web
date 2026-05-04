@@ -4,7 +4,7 @@ import saveBlobAsExcel from "../utils/saveBlobAsExcel";
 function useDownloadData() {
   const downloadData = async (casNum:string, result) => {
     
-    const formData = { cas_rn: casNum, data: result };
+    const formData = { cas_rn: casNum, data: result['data'] };
     const response = await download(formData);
     const blob = new Blob([response.data], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

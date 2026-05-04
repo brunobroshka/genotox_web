@@ -7,7 +7,7 @@ function VisualizeData({
   setSelectedDatabase,
   hoverEffectDatabases,
 }) {
-  const keys = Object.keys(result);
+  const keys = Object.keys(result.databases);
   const isMobile = useIsMobile();
 
   return (
@@ -22,7 +22,7 @@ function VisualizeData({
               isActive = false;
             }
 
-            if (result[key] !== null) {
+            if (result.databases[key] !== null) {
               return (
                 <button
                   className={`${
@@ -50,7 +50,7 @@ function VisualizeData({
           onChange={handleChangeDatabase}
         >
           {keys.map((key) => {
-            if (result[key] !== null) {
+            if (result.databases[key] !== null) {
               return (
                 <option key={key} value={key}>
                   {key}
