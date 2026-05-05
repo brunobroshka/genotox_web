@@ -3,7 +3,7 @@ function Footer() {
     <>
       <div className=" text-center mt-auto mb-6  flex flex-col">
         <span className="  text-sm text-white opacity-100">
-          2025 Genotox DataBase. Version 0.0.1.{" "}
+          2026 Genotox DataBase. Version 1.0.0{" "}
         </span>
         <span className="  text-sm text-white opacity-75">
           For maximum safety cross-check{" "}
