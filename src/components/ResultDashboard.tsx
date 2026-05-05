@@ -77,6 +77,7 @@ function ResultDashboard({ submittedCas, result }: ResultDashboardProps) {
              w-[95%] h-[95%] bg-neutral-100 top-[1%] left-[2.5%] flex flex-col"
           >
             <ModalInformationDatabase
+            setSelectedDatabase={setSelectedDatabase}
               result={result}
               selectedDatabase={selectedDatabase}
             />

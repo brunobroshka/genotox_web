@@ -3,19 +3,21 @@ import { Result } from "../interfacesAndTypes";
 type ModalInformationDatabaseProps = {
   result: Result;
   selectedDatabase: any;
+  setSelectedDatabase:React.Dispatch<React.SetStateAction<string | undefined>>
 };
 function ModalInformationDatabase(props: ModalInformationDatabaseProps) {
-  const { result, selectedDatabase } = props;
+  const { result, selectedDatabase,setSelectedDatabase } = props;
 
   const infoAboutDB = result["data"][selectedDatabase] ;
 
   return (
     <>
       <div className="flex justify-between bg-white p-2 rounded-t-md flex-none">
-        <div>
+        <div className="flex w-full justify-between">
           <span className="text-green-800 text-sm md:text-base font-semibold">
-            {selectedDatabase}
+            {selectedDatabase} 
           </span>
+          <button onClick={() => setSelectedDatabase(undefined)} className="bg-red-200 transition-all duration-300 hover:bg-red-400 rounded-full px-2 py-0.5">X</button>
         </div>
       </div>
       <div className="bg-white flex-1 rounded-b-md overflow-auto p-2">
