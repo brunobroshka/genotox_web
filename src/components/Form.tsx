@@ -14,9 +14,18 @@ function Form(props: formDataQueryProps) {
     props.handleSubmittedCasNum,
   );
 
-  const submit = async (formData) => {
-    const casNum: string = formData.get("cas-number");
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const casNum: string = formData.get("cas-number") as string;
     const showDetails: string = formData.get("show-details") == null ? "false" : "true";
+
+    if(!casNum) {
+      return
+    }
+
     executeQuery(casNum, showDetails);
   };
 
@@ -28,7 +37,7 @@ function Form(props: formDataQueryProps) {
             className="text-gray-400 hidden md:visible transition-colors ease-out duration-300 group-hover:text-gray-600 "
             size={25}
           />
-          <form className="flex gap-3" action={submit}>
+          <form className="flex gap-3" onSubmit={submit}>
             <input
               name="cas-number"
               type="text"
