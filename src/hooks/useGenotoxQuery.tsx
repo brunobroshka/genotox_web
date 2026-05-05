@@ -45,6 +45,17 @@ function useGenotoxQuery(setResult, handleSubmittedCasNum) {
       isPolling = false; 
 
       if (response.status == 200) {
+        if(response.data.combined_heatmap == null || response.data.combined_plotly_figure_json == null){
+        toast.update(toastId, {
+        render: "No data found...",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+          return
+        }
+
+
         setResult(response.data);
         handleSubmittedCasNum(casNum);
         
